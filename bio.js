@@ -127,6 +127,7 @@ function render(p) {
     <div class="facts-wrap">
       <div class="facts">
         ${facts.map(([k, v]) => `<div class="fact reveal"><small>${k}</small><strong>${esc(v)}</strong></div>`).join("")}
+        <div class="fact reveal" data-counter-wrap hidden><small>Lectures</small><strong id="read-count">0</strong></div>
       </div>
     </div>
 
@@ -201,6 +202,9 @@ function render(p) {
   setupVideos();
   setupLightbox(gal);
   setupShare(p);
+
+  countVisit("site").then((v) => showCount(document.getElementById("visit-count"), v));
+  countVisit("bio-" + p.id).then((v) => showCount(document.getElementById("read-count"), v));
 }
 
 function nextLink(p) {

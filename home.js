@@ -85,5 +85,10 @@ function observe() {
 const nav = document.getElementById("nav");
 addEventListener("scroll", () => nav.classList.toggle("scrolled", scrollY > 40), { passive: true });
 
+// Statistiques + compteur de visites
+document.getElementById("stat-bios").textContent = people.length;
+document.getElementById("stat-videos").textContent = people.reduce((n, p) => n + (p.videos || []).length, 0);
+countVisit("site").then((v) => showCount(document.getElementById("visit-count"), v));
+
 [search, regionSel, domaineSel].forEach((el) => el.addEventListener("input", render));
 render();
